@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: 'docbooks-forever'
+    uid: 'docbooks-test'
+    type: 'grafana-docbooks-datasource'
+    access: proxy
+    isDefault: false
+    orgId: 1
+    version: 1
+    editable: true
+    basicAuth: true
+    basicAuthUser: grafana
+    url: https://api.github.com
+    secureJsonData:
+      basicAuthPassword: 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

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Render your runbooks where you need them most in grafana",
   "scripts": {
-    "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
-    "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
+    "build": "webpack --env production",
+    "build:backend": "mkdir -p dist/datasources/grafana-docbooks-datasource/ && cd datasources/grafana-docbooks-datasource/ && mage && cp dist/* ../../dist/datasources/grafana-docbooks-datasource",
+    "dev": "webpack -w --env development",
     "test": "jest --watch --onlyChanged",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit",
