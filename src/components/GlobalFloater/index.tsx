@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 import { GrafanaTheme2 } from "@grafana/data";
 import { Drawer, IconButton, useStyles2, useTheme2 } from "@grafana/ui";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import ReactDOM from 'react-dom/client'
 
@@ -9,18 +9,51 @@ type Props = {};
 
 export function GlobalFloater(props: Props) {
 
-  const theme = useTheme2();
   const styles = useStyles2(getStyles);
   const [mouseDown, setMouseDown] = useState(false);
   // const [position, setPosition] = useState([])
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const [activities, setActivities] = useState<Activity>([]);
+  // const [activities, setActivities] = useState<Activity>([]);
 
-  const openDrawer = ()=>setDrawerOpen(true)
-  const closeDrawer = ()=>setDrawerOpen(false)
+  const openDrawer = useCallback(()=>setDrawerOpen(true), [setDrawerOpen]);
+  const closeDrawer = useCallback(()=>setDrawerOpen(false), [setDrawerOpen]);
   
+  useEffect(()=>{
+
+    // Press d followed by b to open docbooks
+
+    let prevKey = 'x';
+    let prevTime = Number.NaN;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+
+      if (e.target !== document.body) {
+        return;
+      }
+
+      const deltaTime = e.timeStamp - prevTime;
+
+      if (prevKey === 'd' && e.key === 'b' && deltaTime < 1000) {
+        openDrawer();
+      }
+
+      prevKey = e.key;
+      prevTime = e.timeStamp;
+
+    };
+      document.addEventListener('keydown', handleKeyDown, true);
+    
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+
+  }, [openDrawer]);
   
+  useEffect(()=>{
+    console.log("MOUSE IS DOWN", mouseDown)
+  }, [mouseDown])
+
   return <div onMouseDown={()=>setMouseDown(true)} onMouseUp={()=>setMouseDown(false)}>
     {isDrawerOpen && <Drawer onClose={closeDrawer} title='Team name here' subtitle='Run books' closeOnMaskClick>
         Hello, thank you for being here.
