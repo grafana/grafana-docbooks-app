@@ -150,10 +150,10 @@ function getStyles(theme: GrafanaTheme2) {
       margin: theme.spacing(1),
     }),
     floater: css({
-      borderRadius: '100%',
+      //borderRadius: '100%',
       // background: theme.colors.info.main,
-      // width: theme.spacing(4),
-      // height: theme.spacing(4),
+      // width: theme.spacing(8),
+      // height: theme.spacing(8),
       // transition: theme.transitions.easing.easeInOut,
       position: 'absolute',
       bottom: theme.spacing(2),
@@ -176,8 +176,8 @@ export function setUpGlobalFloater() {
   const pageContent = document.getElementById('pageContent');
 
   if (pageContent === null) {
-    console.log("COulnd't find it");
     setTimeout(setUpGlobalFloater, 100);
+    return;
   }
 
 
