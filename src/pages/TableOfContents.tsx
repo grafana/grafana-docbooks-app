@@ -1,24 +1,21 @@
 import React from 'react';
-import { css } from '@emotion/css';
-import { GrafanaTheme2 } from '@grafana/data';
-import { LinkButton, useStyles2 } from '@grafana/ui';
-import { prefixRoute } from '../utils/utils.routing';
-import { ROUTES } from '../constants';
-import { testIds } from '../components/testIds';
-import { PluginPage } from '@grafana/runtime';
 
-export function PageOne() {
+import { css } from '@emotion/css';
+
+import { GrafanaTheme2 } from '@grafana/data';
+import { PluginPage } from '@grafana/runtime';
+import { useStyles2 } from '@grafana/ui';
+
+import { testIds } from '@/components/testIds';
+
+export function TableOfContents() {
   const s = useStyles2(getStyles);
 
   return (
     <PluginPage>
       <div data-testid={testIds.pageOne.container}>
         This is page one.
-        <div className={s.marginTop}>
-          <LinkButton data-testid={testIds.pageOne.navigateToFour} href={prefixRoute(ROUTES.Four)}>
-            Full-width page example
-          </LinkButton>
-        </div>
+        <div className={s.marginTop}></div>
       </div>
     </PluginPage>
   );

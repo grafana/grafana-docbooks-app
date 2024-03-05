@@ -4,7 +4,9 @@
   "name": "Docbooks",
   "id": "grafana-docbooks-app",
   "info": {
-    "keywords": ["app"],
+    "keywords": [
+      "app"
+    ],
     "description": "Render your runbooks where you need them most in grafana",
     "author": {
       "name": "Grafana"
@@ -20,32 +22,16 @@
   "includes": [
     {
       "type": "page",
-      "name": "Page One",
-      "path": "/a/%PLUGIN_ID%/one",
+      "name": "Table of contents",
+      "path": "/a/%PLUGIN_ID%/toc",
       "role": "Admin",
       "addToNav": true,
       "defaultNav": true
     },
     {
       "type": "page",
-      "name": "Page Two",
-      "path": "/a/%PLUGIN_ID%/two",
-      "role": "Admin",
-      "addToNav": true,
-      "defaultNav": false
-    },
-    {
-      "type": "page",
-      "name": "Page Three",
-      "path": "/a/%PLUGIN_ID%/three",
-      "role": "Admin",
-      "addToNav": true,
-      "defaultNav": false
-    },
-    {
-      "type": "page",
-      "name": "Page Four",
-      "path": "/a/%PLUGIN_ID%/four",
+      "name": "File",
+      "path": "/a/%PLUGIN_ID%/f",
       "role": "Admin",
       "addToNav": true,
       "defaultNav": false

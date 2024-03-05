@@ -1,8 +1,11 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
+
 import { PluginType } from '@grafana/data';
+
 import { AppConfig, AppConfigProps } from './AppConfig';
-import { testIds } from 'components/testIds';
+import { testIds } from '@/components/testIds';
 
 describe('Components/AppConfig', () => {
   let props: AppConfigProps;
@@ -13,11 +16,11 @@ describe('Components/AppConfig', () => {
     props = {
       plugin: {
         meta: {
+          enabled: true,
           id: 'sample-app',
+          jsonData: {},
           name: 'Sample App',
           type: PluginType.app,
-          enabled: true,
-          jsonData: {},
         },
       },
       query: {},

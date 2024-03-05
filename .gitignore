@@ -32,4 +32,29 @@ e2e-results/
 # Editor
 .idea
 
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 .eslintcache
+
+provisioning/plugins/*
+!provisioning/plugins/apps.yaml.example
+docker-compose.override.yml
+
+# Release pipeline ignores
+__to_upload__/
+plugin-validator/
+
+src/_mocks_/browser-handlers.ts
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/e2e/.auth
+
+# Python virtual environment
+venv/
