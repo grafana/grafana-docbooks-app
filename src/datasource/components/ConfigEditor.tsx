@@ -34,25 +34,25 @@ export function ConfigEditor(props: Props) {
   };
 
   // Secure field (only sent to the backend)
-  const onAPIKeyChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onAuthTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
     onOptionsChange({
       ...options,
       secureJsonData: {
-        apiKey: event.target.value,
+        authToken: event.target.value,
       },
     });
   };
 
-  const onResetAPIKey = () => {
+  const onResetAuthToken = () => {
     onOptionsChange({
       ...options,
       secureJsonData: {
         ...options.secureJsonData,
-        apiKey: '',
+        authToken: '',
       },
       secureJsonFields: {
         ...options.secureJsonFields,
-        apiKey: false,
+        authToken: false,
       },
     });
   };
@@ -60,7 +60,7 @@ export function ConfigEditor(props: Props) {
   const { jsonData, secureJsonFields } = options;
   const secureJsonData = (options.secureJsonData || {}) as DocBooksSecureJsonData;
   const sourceOptions: SelectableValue[] = [{ label: 'GitHub', value: 'github' }];
-  const labelWidth = 12;
+  const labelWidth = 20;
   const inputWidth = 40;
 
   return (
@@ -68,7 +68,6 @@ export function ConfigEditor(props: Props) {
       <InlineField label="Source" labelWidth={labelWidth}>
         <Select
           value={jsonData.source}
-          defaultValue={{ label: 'GitHub', value: 'github' }}
           options={sourceOptions}
           onChange={onSourceChange}
           placeholder="Source"
@@ -86,14 +85,18 @@ export function ConfigEditor(props: Props) {
       <InlineField label="Repo" labelWidth={labelWidth}>
         <Input onChange={onRepoChange} value={jsonData.repo || ''} placeholder="GitHub repo" width={inputWidth} />
       </InlineField>
-      <InlineField label="API Key" labelWidth={labelWidth}>
+      <InlineField
+        label="Auth Token"
+        labelWidth={labelWidth}
+        tooltip={'Make sure the auth token has read-only access to the contents of the repo'}
+      >
         <SecretInput
-          isConfigured={(secureJsonFields && secureJsonFields.apiKey) as boolean}
-          value={secureJsonData.apiKey || ''}
-          placeholder="GitHub API Key"
+          isConfigured={(secureJsonFields && secureJsonFields.authToken) as boolean}
+          value={secureJsonData.authToken || ''}
+          placeholder="GitHub auth token"
           width={inputWidth}
-          onReset={onResetAPIKey}
-          onChange={onAPIKeyChange}
+          onReset={onResetAuthToken}
+          onChange={onAuthTokenChange}
         />
       </InlineField>
     </div>

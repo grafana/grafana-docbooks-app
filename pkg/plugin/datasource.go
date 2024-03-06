@@ -5,13 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/resource/httpadapter"
-	"math/rand"
 	"net/http"
 	"time"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
+	"github.com/hashicorp/golang-lru/v2/expirable"
 )
 
 var (
@@ -21,10 +21,20 @@ var (
 	_ instancemgmt.InstanceDisposer = (*Datasource)(nil)
 )
 
-func NewDatasource(_ context.Context, _ backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func NewDatasource(_ context.Context, rawInstanceSettings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	var ds Datasource
 
 	mux := http.NewServeMux()
+
+	settings, err := UnmarshalRawInstanceSettings(rawInstanceSettings)
+
+	if err != nil {
+		return nil, err
+	}
+
+	ds.settings = settings
+
+	ds.cache = expirable.NewLRU[string, any](0, nil, 1*time.Hour)
 
 	ds.registerRoutes(mux)
 
@@ -35,6 +45,8 @@ func NewDatasource(_ context.Context, _ backend.DataSourceInstanceSettings) (ins
 
 type Datasource struct {
 	backend.CallResourceHandler
+	settings Settings
+	cache    *expirable.LRU[string, any]
 }
 
 func (d *Datasource) Dispose() {}
@@ -77,11 +89,6 @@ func (d *Datasource) query(_ context.Context, pCtx backend.PluginContext, query 
 func (d *Datasource) CheckHealth(_ context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
 	var status = backend.HealthStatusOk
 	var message = "Data source is working"
-
-	if rand.Int()%2 == 0 {
-		status = backend.HealthStatusError
-		message = "randomized error"
-	}
 
 	return &backend.CheckHealthResult{
 		Status:  status,

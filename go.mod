@@ -7,7 +7,13 @@ require (
 	github.com/grafana/grafana-plugin-sdk-go v0.212.0
 )
 
-require github.com/google/go-querystring v1.1.0 // indirect
+require (
+
+	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
+
+
+)
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
