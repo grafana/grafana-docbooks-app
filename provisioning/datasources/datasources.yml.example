@@ -8,3 +8,9 @@ datasources:
     orgId: 1
     version: 1
     editable: true
+    jsonData:
+      source: 'github'
+      owner: '<owner>'
+      repo: '<repo>'
+    secureJsonData:
+      authToken: '<authToken>'

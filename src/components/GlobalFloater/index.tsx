@@ -8,8 +8,8 @@ import { GrafanaTheme2 } from '@grafana/data';
 import { locationService } from '@grafana/runtime';
 import { IconButton, useStyles2 } from '@grafana/ui';
 
+import { RunbookPicker } from '@/components/GlobalFloater/RubookPicker';
 import { ProviderWrapper } from '@/components/ProviderWrapper';
-import { useTableOfContents } from '@/hooks/api';
 
 type Props = {};
 
@@ -19,9 +19,6 @@ const firstLocation = locationService.getHistory().location;
 
 export function GlobalFloater(props: Props) {
   const styles = useStyles2(getStyles);
-  const tocResults = useTableOfContents();
-
-  console.log(tocResults);
 
   const [mouseDown, setMouseDown] = useState(false);
   const [position, setPosition] = useState<[number, number]>();
@@ -98,20 +95,20 @@ export function GlobalFloater(props: Props) {
     <div>
       <div className={styles.drawer} style={styleOverride}>
         <div className={styles.drawerContents}>
-          <h1>Team name here</h1>
-          Doc books
-          <h2>Your first location</h2>
-          <ul>
-            <li>{JSON.stringify(firstLocation)}</li>
-          </ul>
-          <h2>Where else have you been?</h2>
-          <ul>
-            {locations.map((update, i) => (
-              <li key={i} className={styles.locationItem}>
-                {JSON.stringify(update)}
-              </li>
-            ))}
-          </ul>
+          <RunbookPicker />
+
+          {/*<h2>Your first location</h2>*/}
+          {/*<ul>*/}
+          {/*  <li>{JSON.stringify(firstLocation)}</li>*/}
+          {/*</ul>*/}
+          {/*<h2>Where else have you been?</h2>*/}
+          {/*<ul>*/}
+          {/*  {locations.map((update, i) => (*/}
+          {/*    <li key={i} className={styles.locationItem}>*/}
+          {/*      {JSON.stringify(update)}*/}
+          {/*    </li>*/}
+          {/*  ))}*/}
+          {/*</ul>*/}
         </div>
       </div>
 
