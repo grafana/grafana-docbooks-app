@@ -14,6 +14,11 @@ func (ds *Datasource) handleToc(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (ds *Datasource) handleFile(w http.ResponseWriter, r *http.Request) {
+	ds.fetchGithubFile(w, r)
+}
+
 func (ds *Datasource) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/table-of-contents", ds.handleToc)
+	mux.HandleFunc("/file", ds.handleFile)
 }

@@ -6698,6 +6698,7 @@ __metadata:
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:^29.5.0"
     jest-environment-jsdom: "npm:^29.5.0"
+    markdown-to-jsx: "npm:^7.4.1"
     prettier: "npm:^2.8.7"
     prettier-package-json: "npm:^2.8.0"
     react: "npm:18.2.0"
@@ -10489,6 +10490,15 @@ __metadata:
   version: 2.4.4
   resolution: "mapbox-to-css-font@npm:2.4.4"
   checksum: 10c0/049b074eef23812810d4792d76a2834266653357241e179c794d7d044b104f101233bef9e9cfbb098d05871c6ad88a2e3fcf152d1fb59ae1d788a02733eda0a2
+  languageName: node
+  linkType: hard
+
+"markdown-to-jsx@npm:^7.4.1":
+  version: 7.4.1
+  resolution: "markdown-to-jsx@npm:7.4.1"
+  peerDependencies:
+    react: ">= 0.14.0"
+  checksum: 10c0/f40d9ab632a659ef7fd3afcae9c40e11ce77d57ae856275eb9439bf6762738eefb9897cfb65fc0495347cf8fc3b1cfef6cb9dcfe96959ded3ebd122375155323
   languageName: node
   linkType: hard
 

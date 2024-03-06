@@ -42,6 +42,9 @@ e2e-results/
 
 .eslintcache
 
+provisioning/datasources/*
+!provisioning/datasources/datasources.yaml.example
+
 provisioning/plugins/*
 !provisioning/plugins/apps.yaml.example
 docker-compose.override.yml

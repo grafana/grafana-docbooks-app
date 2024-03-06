@@ -2,6 +2,7 @@ import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 
 import { css } from '@emotion/css';
 import history from 'history';
+import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom/client';
 
 import { GrafanaTheme2 } from '@grafana/data';
@@ -10,12 +11,11 @@ import { IconButton, useStyles2 } from '@grafana/ui';
 
 import { RunbookPicker } from '@/components/GlobalFloater/RubookPicker';
 import { ProviderWrapper } from '@/components/ProviderWrapper';
+import { useFileContent } from '@/hooks/api';
 
 type Props = {};
 
 const DONT_MOVE_BUTTON = false;
-
-const firstLocation = locationService.getHistory().location;
 
 export function GlobalFloater(props: Props) {
   const styles = useStyles2(getStyles);
@@ -27,6 +27,8 @@ export function GlobalFloater(props: Props) {
   const [locations, setLocations] = useState<history.Update[]>([]);
 
   const toggleDrawer = useCallback(() => setDrawerOpen(!isDrawerOpen), [setDrawerOpen, isDrawerOpen]);
+
+  const { data } = useFileContent();
 
   useEffect(() => {
     const unsubscribe = locationService.getHistory().listen((update: history.Update) => {
@@ -97,6 +99,7 @@ export function GlobalFloater(props: Props) {
         <div className={styles.drawerContents}>
           <RunbookPicker />
 
+          {data && <Markdown>{data}</Markdown>}
           {/*<h2>Your first location</h2>*/}
           {/*<ul>*/}
           {/*  <li>{JSON.stringify(firstLocation)}</li>*/}
