@@ -77,11 +77,11 @@ const TableOfContentsMenu = () => {
   );
 };
 
-export const RunbookPicker = () => {
+export const DocbookPicker = () => {
   return (
     <Dropdown overlay={<TableOfContentsMenu />}>
-      <Button variant={'secondary'} icon={'book'}>
-        Runbooks
+      <Button variant={'secondary'} icon={'table'}>
+        Table of contents
       </Button>
     </Dropdown>
   );
