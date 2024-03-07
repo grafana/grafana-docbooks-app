@@ -1,22 +1,11 @@
 import React, { useContext } from 'react';
 
+import { basename, dirname, extname } from 'path-module';
+
 import { Button, Dropdown, Menu, MenuItemProps } from '@grafana/ui';
 
 import { DocbooksDrawerContext } from '@/context/docbooks-drawer-context';
 import { useTableOfContents } from '@/hooks/api';
-
-// helper function to split the path and return filename
-const getFileName = (path: string) => {
-  const pathParts = path.split('/');
-  return pathParts.pop();
-};
-
-// helper function to split the path and return directory
-const getDirectory = (path: string) => {
-  const pathParts = path.split('/');
-  pathParts.pop(); // remove the filename
-  return pathParts.join('/') || '__root__';
-};
 
 const TableOfContentsMenu = () => {
   const toc = useTableOfContents();
@@ -39,15 +28,16 @@ const TableOfContentsMenu = () => {
               },
               node
             ) => {
-              const dir = node.type === 'tree' ? node.path : getDirectory(node.path);
+              //const dir = node.type === 'tree' ? node.path : getDirectory(node.path);
+              const dir = node.type === 'tree' ? node.path : dirname(node.path);
               if (!acc[dir]) {
                 acc[dir] = [];
               }
               // Only add to the group if it's a markdown file
-              if (node.type === 'blob' && getFileName(node.path)?.endsWith('.md')) {
+              if (node.type === 'blob' && extname(node.path) === '.md') {
                 acc[dir].push(
                   <Menu.Item
-                    label={getFileName(node.path)!}
+                    label={basename(node.path, '.md')}
                     onClick={() => {
                       setOpenFile({ datasourceUid, filePath: node.path });
                     }}
@@ -61,10 +51,10 @@ const TableOfContentsMenu = () => {
           // TODO: When rendering the directories, look for directories that would be under other directories and render them as submenus
           return (
             <Menu.Group key={`toc-group-${datasource}`} label={datasource}>
-              {dirs['__root__'] && dirs['__root__'].length > 0 && dirs['__root__']}
+              {dirs['.'] && dirs['.'].length > 0 && dirs['.']}
               {Object.entries(dirs).map(([dir, items]) => {
                 // root items are rendered separately
-                if (dir === '__root__' || items.length === 0) {
+                if (dir === '.' || items.length === 0) {
                   return null;
                 }
                 return <Menu.Item key={`toc-group-${datasource}-${dir}`} label={dir} childItems={items} />;

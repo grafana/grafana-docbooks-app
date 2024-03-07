@@ -6699,6 +6699,7 @@ __metadata:
     jest: "npm:^29.5.0"
     jest-environment-jsdom: "npm:^29.5.0"
     markdown-to-jsx: "npm:^7.4.1"
+    path-module: "npm:^0.1.2"
     prettier: "npm:^2.8.7"
     prettier-package-json: "npm:^2.8.0"
     react: "npm:18.2.0"
@@ -11346,6 +11347,13 @@ __metadata:
   version: 3.1.1
   resolution: "path-key@npm:3.1.1"
   checksum: 10c0/748c43efd5a569c039d7a00a03b58eecd1d75f3999f5a28303d75f521288df4823bc057d8784eb72358b2895a05f29a070bc9f1f17d28226cc4e62494cc58c4c
+  languageName: node
+  linkType: hard
+
+"path-module@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "path-module@npm:0.1.2"
+  checksum: 10c0/39b00508a084eb7c07f1791cadc0734ba544ad24e54ad529291897678c5cbf850b622999036b0cb12637b24df0dfd21ebea02830ec846e3474fd57d87dbddc8a
   languageName: node
   linkType: hard
 

@@ -15,7 +15,7 @@ import { useFileContent } from '@/hooks/api';
 
 type Props = {};
 
-export function GlobalFloater(props: Props) {
+export function GlobalFloater(_: Props) {
   const styles = useStyles2(getStyles);
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -92,7 +92,7 @@ export function GlobalFloater(props: Props) {
 }
 
 function getStyles(theme: GrafanaTheme2) {
-  const drawerWidth = theme.spacing(70);
+  const drawerWidth = 'calc(100vw / 3)';
 
   return {
     controlsContainer: css({
@@ -100,6 +100,7 @@ function getStyles(theme: GrafanaTheme2) {
       display: 'flex',
       flexDirection: 'row',
       gap: theme.spacing(2),
+      marginTop: theme.spacing(1),
     }),
     drawer: css({
       backgroundColor: theme.colors.background.primary,
@@ -121,9 +122,12 @@ function getStyles(theme: GrafanaTheme2) {
       flexDirection: 'column',
       gap: theme.spacing(2),
       height: '100%',
-      margin: theme.spacing(1),
+      img: {
+        maxWidth: '100%',
+      },
+      marginLeft: theme.spacing(1),
       overflowY: 'scroll',
-      padding: theme.spacing(1),
+      paddingLeft: theme.spacing(2),
     }),
   };
 }

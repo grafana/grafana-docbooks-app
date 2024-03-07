@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { dirname, resolve } from 'path-module';
 
 import { config, getBackendSrv } from '@grafana/runtime';
 
@@ -41,6 +42,16 @@ export const useTableOfContents = () => {
   });
 };
 
+const replaceImageLinks = (markdown: string, baseUrl: string, relativeFilePath: string): string => {
+  const regex = /!\[(.*?)\]\((\.{1,2}\/.+?)\)/gm;
+
+  return markdown.replace(regex, (match, p1, p2) => {
+    const resolvedPath = resolve('/', dirname(relativeFilePath), p2);
+
+    return `![${p1}](${baseUrl}${resolvedPath})`;
+  });
+};
+
 export const useFileContent = () => {
   const { openFile } = useContext(DocbooksDrawerContext);
 
@@ -48,8 +59,12 @@ export const useFileContent = () => {
 
   return useQuery({
     enabled: !!openFile,
-    queryFn: () =>
-      getBackendSrv().get<string>(datasourceResourceEndpoint(datasourceUid!) + `/file?path=docbooks/${filePath}`),
+    queryFn: async () => {
+      const baseUrl = datasourceResourceEndpoint(datasourceUid!) + '/file?path=docbooks';
+      let fileContent = await getBackendSrv().get<string>(`${baseUrl}/${filePath}`);
+      fileContent = replaceImageLinks(fileContent, baseUrl, filePath!);
+      return fileContent;
+    },
     queryKey: ['file-content', datasourceUid, filePath],
   });
 };
