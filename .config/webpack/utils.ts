@@ -46,7 +46,7 @@ export async function getEntries(): Promise<Record<string, string>> {
   );
 
   return plugins.reduce((result, modules) => {
-    return modules.reduce((result, module) => {
+    return modules.reduce((result: { [k: string]: string }, module) => {
       const pluginPath = path.dirname(module);
       const pluginName = path.relative(process.cwd(), pluginPath).replace(/src\/?/i, '');
       const entryName = pluginName === '' ? 'module' : `${pluginName}/module`;

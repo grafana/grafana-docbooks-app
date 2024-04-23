@@ -1,7 +1,10 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { AppRootProps, PluginType } from '@grafana/data';
+
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { AppRootProps, PluginType } from '@grafana/data';
+
 import { App } from './App';
 
 describe('Components/App', () => {
@@ -13,15 +16,15 @@ describe('Components/App', () => {
     props = {
       basename: 'a/sample-app',
       meta: {
+        enabled: true,
         id: 'sample-app',
+        jsonData: {},
         name: 'Sample App',
         type: PluginType.app,
-        enabled: true,
-        jsonData: {},
       },
-      query: {},
-      path: '',
       onNavChanged: jest.fn(),
+      path: '',
+      query: {},
     } as unknown as AppRootProps;
   });
 
