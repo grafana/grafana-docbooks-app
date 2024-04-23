@@ -24,7 +24,7 @@ const TableOfContentsMenu = () => {
           const dirs = tree.reduce(
             (
               acc: {
-                [k: string]: React.ReactElement<MenuItemProps<unknown>, string | React.JSXElementConstructor<any>>[];
+                [k: string]: Array<React.ReactElement<MenuItemProps, string | React.JSXElementConstructor<any>>>;
               },
               node
             ) => {
