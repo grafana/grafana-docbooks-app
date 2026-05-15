@@ -1,18 +1,17 @@
 module github.com/grafana/docbooks-datasource
 
-go 1.21
+go 1.25.0
 
 require (
 	github.com/google/go-github/v60 v60.0.0
 	github.com/grafana/grafana-plugin-sdk-go v0.212.0
+	github.com/hashicorp/golang-lru/v2 v2.0.7
 )
 
 require (
-
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
-
-
+	golang.org/x/sync v0.20.0 // indirect
+	golang.org/x/telemetry v0.0.0-20260311193753-579e4da9a98c // indirect
 )
 
 require (
@@ -85,11 +84,11 @@ require (
 	go.opentelemetry.io/otel/trace v1.22.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.0.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
-	golang.org/x/mod v0.13.0 // indirect
-	golang.org/x/net v0.20.0 // indirect
-	golang.org/x/sys v0.16.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-	golang.org/x/tools v0.14.0 // indirect
+	golang.org/x/mod v0.34.0 // indirect
+	golang.org/x/net v0.53.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
+	golang.org/x/tools v0.43.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/genproto v0.0.0-20231002182017-d307bd883b97 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20231002182017-d307bd883b97 // indirect
